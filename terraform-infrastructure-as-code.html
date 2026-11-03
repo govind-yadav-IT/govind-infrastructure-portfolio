@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Terraform Infrastructure as Code · Govind Yadav</title>
+<meta name="description" content="Case study: provisioning AWS EC2 with Terraform.">
+<meta property="og:title" content="Terraform Infrastructure as Code · Govind Yadav">
+<meta property="og:description" content="Case study: provisioning AWS EC2 with Terraform.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;750&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="container nav">
+  <a class="brand" href="../index.html"><span class="mark">GY</span> Govind Yadav</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  <nav class="nav-links" id="nav-links" aria-label="Primary">
+    <a href="../index.html" >Home</a>
+    <a href="../about.html" >About</a>
+    <a href="../projects/index.html" aria-current="page">Projects</a>
+    <a href="../notes/index.html" >Notes</a>
+    <a href="../contact.html" >Contact</a>
+  </nav>
+</div></header>
+<main id="main">
+
+<section class="section" style="border-top:0"><div class="container article">
+<nav class="crumbs"><a href="index.html">Projects</a> / Terraform Infrastructure as Code</nav>
+<span class="kicker">Infrastructure as Code</span>
+<h1>Terraform Infrastructure as Code</h1>
+<div class="meta"><span class="tag">Terraform</span><span class="tag">AWS</span><span class="tag">EC2</span><span class="tag">Variables</span><span class="tag">Outputs</span><span class="tag">State</span></div>
+<p><a href="https://github.com/govind-yadav-IT/terraform-projects">View repository on GitHub →</a></p>
+
+<h2>Objective</h2>
+<p>The objective was to learn Infrastructure as Code by provisioning an AWS EC2 instance using Terraform rather than creating it manually in the AWS Console.</p>
+<h2>Problem addressed</h2>
+<p>Manual cloud setup is difficult to reproduce and easy to drift from. Terraform makes the intended infrastructure declarative: the configuration describes the required resources, and Terraform plans and applies changes against that description.</p>
+<h2>Implementation</h2>
+<ul class="checks">
+<li>The repository includes <code>main.tf</code>, <code>variables.tf</code>, <code>outputs.tf</code>, <code>.terraform.lock.hcl</code>, and a README.</li>
+<li>The configuration uses the AWS provider and provisions an EC2 instance.</li>
+<li>The README documents the AWS region as <code>ap-south-1</code> and the instance type as <code>t3.micro</code>.</li>
+<li>Resource tags are part of the configuration.</li>
+<li>The README covers <code>terraform init</code>, <code>plan</code>, <code>apply</code>, and <code>destroy</code>.</li>
+<li>The project introduces Terraform state and how Terraform tracks managed resources.</li>
+</ul>
+<pre><code>terraform init
+terraform plan
+terraform apply
+terraform destroy</code></pre>
+<h2>Technical decisions</h2>
+<ul class="checks">
+<li>Separating <code>variables.tf</code> and <code>outputs.tf</code> keeps configuration inputs and resulting values explicit.</li>
+<li>The lock file helps make provider versions more reproducible.</li>
+<li>Using a small instance type keeps the learning project inexpensive.</li>
+<li>Tags make AWS resources easier to identify.</li>
+</ul>
+<h2>What I learned</h2>
+<p>I learned how Terraform translates configuration into a plan, how state records the resources Terraform manages, and why a plan should be reviewed before an apply. I also learned that Infrastructure as Code is as much about repeatability and review as it is about creating resources.</p>
+<h2>Current limitations</h2>
+<ul class="checks">
+<li>This is an Infrastructure as Code learning project.</li>
+<li>Security Groups, remote S3 state, and other advanced configuration should be verified directly in the repository before being described as implemented.</li>
+<li>No measured provisioning-time improvement is claimed, since that would require evidence.</li>
+</ul>
+<h2>Future improvements</h2>
+<ul class="checks">
+<li>Add a dedicated Security Group with explicit ingress rules.</li>
+<li>Use a remote S3 backend with state locking.</li>
+<li>Add automated <code>terraform fmt</code>, <code>validate</code>, and <code>plan</code> checks in CI.</li>
+<li>Introduce multiple environments through workspaces or directory structure.</li>
+</ul>
+<div class="proj-nav"><a href="infrastructure-delivery-platform.html">← Infrastructure Delivery Platform</a><a href="linux-automation-toolkit.html">System Operations Toolkit →</a></div>
+</div></section>
+</main>
+
+<footer class="site-footer"><div class="container footer-grid">
+  <div>
+    <p style="margin:0 0 6px"><strong>Govind Yadav</strong></p>
+    <p class="small" style="margin:0">Cloud Infrastructure Engineering · Mumbai, India</p>
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/govind-yadav-IT" rel="me">GitHub</a>
+    <a href="https://www.linkedin.com/in/govind-yadav-it/" rel="me">LinkedIn</a>
+    <a href="mailto:govindyadav8245@gmail.com">Email</a>
+    <a href="../projects/index.html">Projects</a>
+  </div>
+</div></footer>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

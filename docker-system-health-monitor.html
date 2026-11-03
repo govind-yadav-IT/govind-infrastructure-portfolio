@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Docker System Health Monitor · Govind Yadav</title>
+<meta name="description" content="Case study: containerizing a Bash system health monitor.">
+<meta property="og:title" content="Docker System Health Monitor · Govind Yadav">
+<meta property="og:description" content="Case study: containerizing a Bash system health monitor.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;750&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="container nav">
+  <a class="brand" href="../index.html"><span class="mark">GY</span> Govind Yadav</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  <nav class="nav-links" id="nav-links" aria-label="Primary">
+    <a href="../index.html" >Home</a>
+    <a href="../about.html" >About</a>
+    <a href="../projects/index.html" aria-current="page">Projects</a>
+    <a href="../notes/index.html" >Notes</a>
+    <a href="../contact.html" >Contact</a>
+  </nav>
+</div></header>
+<main id="main">
+
+<section class="section" style="border-top:0"><div class="container article">
+<nav class="crumbs"><a href="index.html">Projects</a> / Docker System Health Monitor</nav>
+<span class="kicker">Docker · Linux</span>
+<h1>Docker System Health Monitor</h1>
+<div class="meta"><span class="tag">Docker</span><span class="tag">Dockerfile</span><span class="tag">Ubuntu</span><span class="tag">Bash</span><span class="tag">Linux monitoring</span></div>
+<p><a href="https://github.com/govind-yadav-IT/docker-projects">View repository on GitHub →</a></p>
+
+<h2>Objective</h2>
+<p>The objective was to package a Linux system health-monitoring script into a custom Docker image, demonstrating how a script and its runtime dependencies can be distributed as a container.</p>
+<h2>Problem addressed</h2>
+<p>A monitoring script may work on one machine but fail on another because of missing dependencies or configuration differences. Containerizing it makes the execution environment more consistent.</p>
+<h2>Implementation</h2>
+<ul class="checks">
+<li>The repository contains a <code>Dockerfile</code>, <code>README.md</code>, <code>check_path.sh</code>, and <code>system_health.sh</code>.</li>
+<li>The image uses Ubuntu as its base image.</li>
+<li><code>system_health.sh</code> checks CPU, memory, and disk usage.</li>
+<li>The script reports warning conditions when usage exceeds 80%.</li>
+<li><code>check_path.sh</code> accepts a path argument and checks disk usage for that path.</li>
+</ul>
+<pre><code>docker build -t system-health:v1 .
+docker run system-health:v1</code></pre>
+<h2>Technical decisions</h2>
+<ul class="checks">
+<li>Ubuntu provides a familiar Linux base for running Bash-based system checks.</li>
+<li>The Dockerfile packages the script with its execution environment.</li>
+<li>A versioned image tag, <code>system-health:v1</code>, makes the built image easier to identify.</li>
+</ul>
+<h2>What I learned</h2>
+<p>I learned how a Dockerfile turns a script into a portable image, how <code>docker build</code> and <code>docker run</code> fit into that workflow, and how containerization can reduce environment differences.</p>
+<h2>Current limitations</h2>
+<ul class="checks">
+<li>This is a containerization and system-monitoring exercise.</li>
+<li>This repository does not contain a Docker Compose file; it should not be confused with the separate Compose project.</li>
+<li>The monitor reports local container or host-level signals depending on how it is run; it is not a full observability platform.</li>
+</ul>
+<h2>Future improvements</h2>
+<ul class="checks">
+<li>Add configurable thresholds and output formats.</li>
+<li>Run the container with explicitly defined capabilities and read-only filesystem settings where practical.</li>
+<li>Add automated image build checks in CI.</li>
+</ul>
+<div class="proj-nav"><a href="linux-automation-toolkit.html">← System Operations Toolkit</a><a href="docker-compose-application.html">Docker Compose Application →</a></div>
+</div></section>
+</main>
+
+<footer class="site-footer"><div class="container footer-grid">
+  <div>
+    <p style="margin:0 0 6px"><strong>Govind Yadav</strong></p>
+    <p class="small" style="margin:0">Cloud Infrastructure Engineering · Mumbai, India</p>
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/govind-yadav-IT" rel="me">GitHub</a>
+    <a href="https://www.linkedin.com/in/govind-yadav-it/" rel="me">LinkedIn</a>
+    <a href="mailto:govindyadav8245@gmail.com">Email</a>
+    <a href="../projects/index.html">Projects</a>
+  </div>
+</div></footer>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

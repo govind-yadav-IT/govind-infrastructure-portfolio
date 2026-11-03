@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Infrastructure Delivery Platform · Govind Yadav</title>
+<meta name="description" content="Case study: Terraform, EC2, Docker, Nginx, GitHub Actions, and S3-based health logging.">
+<meta property="og:title" content="Infrastructure Delivery Platform · Govind Yadav">
+<meta property="og:description" content="Case study: Terraform, EC2, Docker, Nginx, GitHub Actions, and S3-based health logging.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;750&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="container nav">
+  <a class="brand" href="../index.html"><span class="mark">GY</span> Govind Yadav</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  <nav class="nav-links" id="nav-links" aria-label="Primary">
+    <a href="../index.html" >Home</a>
+    <a href="../about.html" >About</a>
+    <a href="../projects/index.html" aria-current="page">Projects</a>
+    <a href="../notes/index.html" >Notes</a>
+    <a href="../contact.html" >Contact</a>
+  </nav>
+</div></header>
+<main id="main">
+
+<section class="section" style="border-top:0"><div class="container article">
+<nav class="crumbs"><a href="index.html">Projects</a> / Infrastructure Delivery Platform</nav>
+<span class="kicker">AWS · Terraform · CI/CD</span>
+<h1>Infrastructure Delivery Platform</h1>
+<div class="meta"><span class="tag">AWS EC2</span><span class="tag">Terraform</span><span class="tag">Docker</span><span class="tag">Docker Compose</span><span class="tag">Nginx</span><span class="tag">GitHub Actions</span><span class="tag">Bash</span><span class="tag">S3</span></div>
+<p><a href="https://github.com/govind-yadav-IT/infrastructure-delivery-platform">View repository on GitHub →</a></p>
+
+<h2>Objective</h2>
+<p>The objective was to build a practical infrastructure delivery workflow that connects infrastructure provisioning, containerized application hosting, and deployment automation.</p>
+<h2>Problem addressed</h2>
+<p>Deploying an application involves more than writing code. The host must exist, the application must run consistently, the web server must serve the right files, and there should be a way to verify that the deployment is healthy. This project brings those pieces into one workflow.</p>
+<h2>Architecture</h2>
+<p>The workflow is structured around an AWS EC2 host running Docker Compose. GitHub Actions provides the automation layer, while a Bash health-check script verifies the local application and uploads its log to Amazon S3.</p>
+<figure class="diagram">
+<svg viewBox="0 0 640 330" role="img" aria-label="Infrastructure delivery topology: GitHub Actions deploys via SSH to an EC2 instance running Docker Compose and Nginx, with health checks writing logs to Amazon S3.">
+<rect class="node" x="20" y="40" width="150" height="70" rx="8"/><text class="label" x="40" y="68">GitHub</text><text class="sub" x="40" y="86">Push / Actions</text>
+<rect class="node node-accent" x="245" y="40" width="150" height="70" rx="8"/><text class="label" x="265" y="68">GitHub Actions</text><text class="sub" x="265" y="86">deploy.yml</text>
+<rect class="node" x="470" y="40" width="150" height="70" rx="8"/><text class="label" x="490" y="68">AWS EC2</text><text class="sub" x="490" y="86">Ubuntu host</text>
+<rect class="node" x="245" y="180" width="150" height="70" rx="8"/><text class="label" x="265" y="208">Docker Compose</text><text class="sub" x="265" y="226">Nginx container</text>
+<rect class="node" x="470" y="180" width="150" height="70" rx="8"/><text class="label" x="490" y="208">Health check</text><text class="sub" x="490" y="226">Bash + curl</text>
+<rect class="node" x="245" y="280" width="150" height="52" rx="8"/><text class="label" x="265" y="302">Amazon S3</text><text class="sub" x="265" y="318">health.log</text>
+<path class="edge" d="M170 75 H245"/><path class="edge-accent" d="M395 75 H470"/>
+<path class="edge" d="M545 110 V180"/><path class="edge" d="M470 215 H395"/>
+<path class="edge-accent" d="M320 250 V280"/>
+<text class="sub" x="180" y="66">CI trigger</text><text class="sub" x="404" y="66">SSH deploy</text><text class="sub" x="552" y="150">local check</text><text class="sub" x="330" y="272">log upload</text>
+</svg>
+<figcaption>Reference topology for the Infrastructure Delivery Platform.</figcaption>
+</figure>
+<h2>Implementation</h2>
+<ul class="checks">
+<li><strong>Terraform-based AWS provisioning:</strong> the project is intended to provision the EC2 hosting environment through Terraform.</li>
+<li><strong>Docker Compose and Nginx:</strong> a <code>docker-compose.yml</code> file defines an Nginx service named <code>portfolio-web</code>, exposes port 80, mounts the <code>html/</code> directory read-only into Nginx’s web root, and restarts the container automatically.</li>
+<li><strong>GitHub Actions deployment:</strong> the repository contains <code>.github/workflows/deploy.yml</code>, which represents the deployment automation entry point.</li>
+<li><strong>Bash health check:</strong> <code>Scripts/health-check.sh</code> uses <code>curl</code> against <code>http://localhost</code>, records a timestamped HEALTHY or UNHEALTHY result, appends it to a local log, and copies the log to an S3 bucket.</li>
+<li><strong>Static application content:</strong> <code>html/index.html</code> provides the content served by Nginx.</li>
+</ul>
+<pre><code>version: "3.8"
+services:
+  webserver:
+    image: nginx:latest
+    container_name: portfolio-web
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    restart: always</code></pre>
+<h2>Technical decisions</h2>
+<ul class="checks">
+<li>Nginx is used as a lightweight web server for static content.</li>
+<li>The HTML directory is mounted read-only, separating application content from the container image.</li>
+<li><code>restart: always</code> makes the container restart automatically after host or container restarts.</li>
+<li>The health check writes a timestamped record rather than only printing a status, making the result easier to retain and review.</li>
+<li>S3 provides durable storage for the health log outside the EC2 host.</li>
+</ul>
+<h2>What I learned</h2>
+<p>This project helped me connect several infrastructure concepts: provisioning, container configuration, port mapping, volume mounts, deployment automation, and post-deployment verification. It also showed that a deployment is not complete simply because a container starts; the served endpoint needs to be checked.</p>
+<h2>Current limitations</h2>
+<ul class="checks">
+<li>This is a learning project, not a production platform.</li>
+<li>The health-check script assumes that its log directory already exists.</li>
+<li>It assumes AWS CLI credentials and S3 permissions are configured on the host.</li>
+<li>Repository-level evidence for CloudWatch alarms, cron scheduling, and the complete Terraform resource set could not be independently verified in this build, so those items should be confirmed against the repository before being presented as implemented features.</li>
+</ul>
+<h2>Future improvements</h2>
+<ul class="checks">
+<li>Add explicit health-check configuration to Docker Compose.</li>
+<li>Use structured logging and retention policies for health records.</li>
+<li>Add automated Terraform validation and plan output in CI.</li>
+<li>Expand monitoring beyond a single local HTTP check.</li>
+</ul>
+<div class="proj-nav"><a href="terraform-infrastructure-as-code.html">← Terraform Infrastructure as Code</a><a href="linux-automation-toolkit.html">System Operations Toolkit →</a></div>
+</div></section>
+</main>
+
+<footer class="site-footer"><div class="container footer-grid">
+  <div>
+    <p style="margin:0 0 6px"><strong>Govind Yadav</strong></p>
+    <p class="small" style="margin:0">Cloud Infrastructure Engineering · Mumbai, India</p>
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/govind-yadav-IT" rel="me">GitHub</a>
+    <a href="https://www.linkedin.com/in/govind-yadav-it/" rel="me">LinkedIn</a>
+    <a href="mailto:govindyadav8245@gmail.com">Email</a>
+    <a href="../projects/index.html">Projects</a>
+  </div>
+</div></footer>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>System Operations Toolkit · Govind Yadav</title>
+<meta name="description" content="Case study: Linux and Bash automation scripts with ShellCheck CI.">
+<meta property="og:title" content="System Operations Toolkit · Govind Yadav">
+<meta property="og:description" content="Case study: Linux and Bash automation scripts with ShellCheck CI.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;750&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="container nav">
+  <a class="brand" href="../index.html"><span class="mark">GY</span> Govind Yadav</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  <nav class="nav-links" id="nav-links" aria-label="Primary">
+    <a href="../index.html" >Home</a>
+    <a href="../about.html" >About</a>
+    <a href="../projects/index.html" aria-current="page">Projects</a>
+    <a href="../notes/index.html" >Notes</a>
+    <a href="../contact.html" >Contact</a>
+  </nav>
+</div></header>
+<main id="main">
+
+<section class="section" style="border-top:0"><div class="container article">
+<nav class="crumbs"><a href="index.html">Projects</a> / System Operations Toolkit</nav>
+<span class="kicker">Linux · Bash · Automation</span>
+<h1>System Operations Toolkit</h1>
+<div class="meta"><span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">Shell scripting</span><span class="tag">Git</span><span class="tag">GitHub Actions</span><span class="tag">ShellCheck</span></div>
+<p><a href="https://github.com/govind-yadav-IT/linux-scripts">View repository on GitHub →</a></p>
+
+<h2>Objective</h2>
+<p>The objective was to build a practical Linux and Bash operations toolkit for common system-administration checks: disk usage, system health, log inspection, path-specific usage, and backups.</p>
+<h2>Problem addressed</h2>
+<p>Linux systems generate useful operational signals, but those signals are only helpful if they can be inspected consistently. These scripts turn routine checks into small, repeatable commands.</p>
+<h2>Implementation</h2>
+<ul class="checks">
+<li><code>disk_usage.sh</code> monitors disk usage across partitions and warns when usage exceeds 80%.</li>
+<li><code>system_health.sh</code> checks CPU, memory, and disk status and displays OK or WARNING states.</li>
+<li><code>log_analyzer.sh</code> counts total log lines, identifies errors and warnings, and displays the last five lines.</li>
+<li><code>check_path.sh</code> checks disk usage for a user-supplied path.</li>
+<li><code>backup.sh</code> copies shell scripts into a timestamped backup directory.</li>
+<li><code>arguments_practice.sh</code>, <code>functions_practice.sh</code>, and <code>hello_system.sh</code> cover Bash arguments, reusable functions, and environment variables.</li>
+<li>The README states that GitHub Actions runs syntax checks and ShellCheck when code is pushed.</li>
+</ul>
+<h2>Technical decisions</h2>
+<ul class="checks">
+<li>Each script has a narrow responsibility, making it easier to read, test, and reuse.</li>
+<li>The 80% threshold gives a simple, explicit warning condition.</li>
+<li>ShellCheck provides automated static analysis for common Bash mistakes.</li>
+<li>GitHub Actions turns script quality checks into a repeatable CI step.</li>
+</ul>
+<h2>What I learned</h2>
+<p>I learned how to structure Bash scripts with arguments and functions, inspect system resources from the command line, and use CI to catch basic scripting issues before they reach a repository’s main branch.</p>
+<h2>Current limitations</h2>
+<ul class="checks">
+<li>This is a practical operations toolkit, not an enterprise monitoring platform.</li>
+<li>The exact AWS EC2 deployment process mentioned in the README could not be independently verified in this build.</li>
+<li>The scripts are intended for learning and light operational use rather than large-scale fleet monitoring.</li>
+</ul>
+<h2>Future improvements</h2>
+<ul class="checks">
+<li>Add unit-style tests for script behaviour.</li>
+<li>Support configurable thresholds through arguments or environment variables.</li>
+<li>Emit machine-readable output such as JSON for integration with other tools.</li>
+<li>Add alerting or notification integration where appropriate.</li>
+</ul>
+<div class="proj-nav"><a href="terraform-infrastructure-as-code.html">← Terraform Infrastructure as Code</a><a href="docker-system-health-monitor.html">Docker System Health Monitor →</a></div>
+</div></section>
+</main>
+
+<footer class="site-footer"><div class="container footer-grid">
+  <div>
+    <p style="margin:0 0 6px"><strong>Govind Yadav</strong></p>
+    <p class="small" style="margin:0">Cloud Infrastructure Engineering · Mumbai, India</p>
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/govind-yadav-IT" rel="me">GitHub</a>
+    <a href="https://www.linkedin.com/in/govind-yadav-it/" rel="me">LinkedIn</a>
+    <a href="mailto:govindyadav8245@gmail.com">Email</a>
+    <a href="../projects/index.html">Projects</a>
+  </div>
+</div></footer>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

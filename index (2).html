@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Govind Yadav — Cloud Infrastructure Engineering · Govind Yadav</title>
+<meta name="description" content="Govind Yadav is an early-career engineer building practical skills in AWS, Terraform, Linux, Docker, and CI/CD.">
+<meta property="og:title" content="Govind Yadav — Cloud Infrastructure Engineering · Govind Yadav">
+<meta property="og:description" content="Govind Yadav is an early-career engineer building practical skills in AWS, Terraform, Linux, Docker, and CI/CD.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;750&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="container nav">
+  <a class="brand" href="index.html"><span class="mark">GY</span> Govind Yadav</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  <nav class="nav-links" id="nav-links" aria-label="Primary">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="about.html" >About</a>
+    <a href="projects/index.html" >Projects</a>
+    <a href="notes/index.html" >Notes</a>
+    <a href="contact.html" >Contact</a>
+  </nav>
+</div></header>
+<main id="main">
+
+<section class="hero"><div class="container hero-grid">
+  <div>
+    <span class="status"><span class="dot"></span>Open to entry-level cloud / infrastructure opportunities</span>
+    <h1>Govind Yadav<span class="role">Cloud Infrastructure Engineering</span></h1>
+    <p class="lede">Building and understanding the infrastructure behind reliable software systems.</p>
+    <p class="lede">I work across AWS, Terraform, Linux, Bash, Docker, and GitHub Actions — learning how infrastructure is provisioned, deployed, monitored, and operated.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="projects/index.html">View engineering projects</a>
+      <a class="btn" href="https://github.com/govind-yadav-IT">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/govind-yadav-it/">LinkedIn</a>
+      <a class="btn" href="contact.html">Contact</a>
+    </div>
+  </div>
+  <figure class="diagram reveal">
+<svg viewBox="0 0 640 330" role="img" aria-label="Infrastructure delivery topology: GitHub Actions deploys via SSH to an EC2 instance running Docker Compose and Nginx, with health checks writing logs to Amazon S3.">
+<rect class="node" x="20" y="40" width="150" height="70" rx="8"/><text class="label" x="40" y="68">GitHub</text><text class="sub" x="40" y="86">Push / Actions</text>
+<rect class="node node-accent" x="245" y="40" width="150" height="70" rx="8"/><text class="label" x="265" y="68">GitHub Actions</text><text class="sub" x="265" y="86">deploy.yml</text>
+<rect class="node" x="470" y="40" width="150" height="70" rx="8"/><text class="label" x="490" y="68">AWS EC2</text><text class="sub" x="490" y="86">Ubuntu host</text>
+<rect class="node" x="245" y="180" width="150" height="70" rx="8"/><text class="label" x="265" y="208">Docker Compose</text><text class="sub" x="265" y="226">Nginx container</text>
+<rect class="node" x="470" y="180" width="150" height="70" rx="8"/><text class="label" x="490" y="208">Health check</text><text class="sub" x="490" y="226">Bash + curl</text>
+<rect class="node" x="245" y="280" width="150" height="52" rx="8"/><text class="label" x="265" y="302">Amazon S3</text><text class="sub" x="265" y="318">health.log</text>
+<path class="edge" d="M170 75 H245"/><path class="edge-accent" d="M395 75 H470"/>
+<path class="edge" d="M545 110 V180"/><path class="edge" d="M470 215 H395"/>
+<path class="edge-accent" d="M320 250 V280"/>
+<text class="sub" x="180" y="66">CI trigger</text><text class="sub" x="404" y="66">SSH deploy</text><text class="sub" x="552" y="150">local check</text><text class="sub" x="330" y="272">log upload</text>
+</svg>
+<figcaption>Reference topology for the Infrastructure Delivery Platform.</figcaption>
+</figure>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><div><span class="kicker">Selected work</span><h2>Engineering projects</h2></div><a href="projects/index.html">All projects →</a></div>
+  <div class="grid grid-3">
+    <article class="card reveal"><div class="card-top"><span>01</span><span>AWS · Terraform</span></div>
+      <h3><a href="projects/infrastructure-delivery-platform.html">Infrastructure Delivery Platform</a></h3>
+      <p>A practical delivery workflow connecting Terraform-based AWS provisioning, Dockerized Nginx hosting, GitHub Actions deployment, and Bash health checks with S3 log storage.</p>
+      <div class="tags"><span class="tag">Terraform</span><span class="tag">EC2</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span></div></article>
+    <article class="card reveal"><div class="card-top"><span>02</span><span>IaC</span></div>
+      <h3><a href="projects/terraform-infrastructure-as-code.html">Terraform Infrastructure as Code</a></h3>
+      <p>An Infrastructure as Code learning project that provisions an EC2 instance in AWS using Terraform configuration, variables, outputs, and state.</p>
+      <div class="tags"><span class="tag">Terraform</span><span class="tag">AWS</span><span class="tag">EC2</span><span class="tag">IaC</span></div></article>
+    <article class="card reveal"><div class="card-top"><span>03</span><span>Linux · Bash</span></div>
+      <h3><a href="projects/linux-automation-toolkit.html">System Operations Toolkit</a></h3>
+      <p>A collection of Bash scripts for disk, CPU, memory, and log monitoring, with ShellCheck-based CI checks through GitHub Actions.</p>
+      <div class="tags"><span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">ShellCheck</span><span class="tag">GitHub Actions</span></div></article>
+  </div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><div><span class="kicker">Approach</span><h2>How I work</h2></div></div>
+  <div class="grid grid-3">
+    <div class="card reveal"><span class="kicker">Understand</span><h3>Systems beneath abstractions</h3><p>I like tracing a request or deployment from the application layer down to containers, operating systems, networking, and cloud resources.</p></div>
+    <div class="card reveal"><span class="kicker">Automate</span><h3>Repeatable infrastructure</h3><p>I use Terraform, Bash, Docker, and GitHub Actions to make provisioning and deployment steps explicit, versioned, and repeatable.</p></div>
+    <div class="card reveal"><span class="kicker">Operate</span><h3>Reliability and observability</h3><p>I am developing practical habits around health checks, logging, monitoring, and understanding what happens after a deployment.</p></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><div><span class="kicker">Capabilities</span><h2>Technical areas</h2></div><a href="about.html">More about me →</a></div>
+  <div class="skill-groups">
+    <div class="skill-group reveal"><h3>Cloud</h3><ul><li>AWS</li><li>EC2</li><li>S3</li><li>IAM</li><li>CloudWatch</li></ul></div>
+    <div class="skill-group reveal"><h3>Infrastructure as Code</h3><ul><li>Terraform</li><li>IaC fundamentals</li><li>Variables &amp; outputs</li><li>State</li></ul></div>
+    <div class="skill-group reveal"><h3>Systems</h3><ul><li>Linux</li><li>Bash</li><li>Shell scripting</li></ul></div>
+    <div class="skill-group reveal"><h3>Containers</h3><ul><li>Docker</li><li>Docker Compose</li><li>Nginx</li></ul></div>
+    <div class="skill-group reveal"><h3>Automation &amp; delivery</h3><ul><li>Git</li><li>GitHub</li><li>GitHub Actions</li><li>CI/CD fundamentals</li><li>SSH</li></ul></div>
+    <div class="skill-group reveal"><h3>Programming</h3><ul><li>Python</li></ul></div>
+  </div>
+</div></section>
+</main>
+
+<footer class="site-footer"><div class="container footer-grid">
+  <div>
+    <p style="margin:0 0 6px"><strong>Govind Yadav</strong></p>
+    <p class="small" style="margin:0">Cloud Infrastructure Engineering · Mumbai, India</p>
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/govind-yadav-IT" rel="me">GitHub</a>
+    <a href="https://www.linkedin.com/in/govind-yadav-it/" rel="me">LinkedIn</a>
+    <a href="mailto:govindyadav8245@gmail.com">Email</a>
+    <a href="projects/index.html">Projects</a>
+  </div>
+</div></footer>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
